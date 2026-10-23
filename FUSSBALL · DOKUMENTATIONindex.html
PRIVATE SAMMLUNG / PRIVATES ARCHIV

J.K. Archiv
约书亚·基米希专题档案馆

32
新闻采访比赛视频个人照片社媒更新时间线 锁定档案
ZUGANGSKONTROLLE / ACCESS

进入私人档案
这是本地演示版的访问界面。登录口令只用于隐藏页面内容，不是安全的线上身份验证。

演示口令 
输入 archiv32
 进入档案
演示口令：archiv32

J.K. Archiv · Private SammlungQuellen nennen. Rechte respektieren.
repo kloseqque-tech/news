@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="基米希专题足球新闻与照片私人档案馆">
+<title>J.K. Archiv — 基米希档案馆</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="topline"><span>FUSSBALL · DOKUMENTATION</span><span id="today"></span></div>
+  <div class="brand-row">
+    <div>
+      <p class="eyebrow">PRIVATE SAMMLUNG / PRIVATES ARCHIV</p>
+      <h1>J.K. <em>Archiv</em></h1>
+      <p class="subtitle">约书亚·基米希专题档案馆</p>
+    </div>
+    <div class="brand-mark" aria-hidden="true">32</div>
+  </div>
+  <nav class="nav">
+    <a href="#news">新闻</a><a href="#interviews">采访</a><a href="#matchVideos">比赛视频</a><a href="#photos">个人照片</a><a href="#social">社媒更新</a><a href="#timeline">时间线</a>
+    <button id="lockBtn" class="text-button">锁定档案</button>
+  </nav>
+</header>
+
+<main>
+  <section id="loginScreen" class="login-wrap">
+    <div class="login-paper">
+      <p class="eyebrow">ZUGANGSKONTROLLE / ACCESS</p>
+      <h2>进入私人档案</h2>
+      <p class="muted">这是本地演示版的访问界面。登录口令只用于隐藏页面内容，不是安全的线上身份验证。</p>
+      <label for="passcode">演示口令</label>
+      <input id="passcode" type="password" placeholder="输入 archiv32" autocomplete="current-password">
+      <button id="loginBtn" class="primary">进入档案</button>
+      <p id="loginMessage" class="small" role="status">演示口令：<code>archiv32</code></p>
+    </div>
+  </section>
+
+  <div id="archiveApp" hidden>
+    <section class="intro-grid">
+      <div class="intro-copy">
+        <p class="eyebrow">SPIELERDOSSIER · 01</p>
+        <h2>一个球员，<br>一座不断生长的档案。</h2>
+        <p>分为新闻、采访、比赛视频、个人照片、社媒更新五个板块。保留原始出处，记录翻译与个人注释，让每一条资料都能追溯。</p>
+      </div>
+      <div class="feature-note">
+        <span class="stamp">ARCHIVNOTIZ</span>
+        <p>“原文优先，来源清晰，时间可追。”</p>
+        <span class="muted small">档案原则 / Archivprinzipien</span>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div><strong id="newsCount">0</strong><span>新闻条目</span></div>
+      <div><strong id="photoCount">0</strong><span>照片条目</span></div>
+      <div><strong id="yearCount">—</strong><span>覆盖年份</span></div>
+    </section>
+
+    <section class="section-head" id="news">
+      <div><p class="eyebrow">PRESSE · INTERVIEWS · BERICHTE</p><h2>新闻档案</h2></div>
+      <button class="primary" id="addNewsBtn">＋ 添加新闻</button>
+    </section>
+    <div class="toolbar">
+      <input id="searchInput" type="search" placeholder="搜索标题、来源、标签……">
+      <select id="categoryFilter" aria-label="按分类筛选">
+        <option value="">全部分类</option><option>新闻</option><option>采访</option><option>比赛视频</option><option>个人照片</option><option>社媒更新</option>
+      </select>
+      <select id="yearFilter" aria-label="按年份筛选"><option value="">全部年份</option></select>
+    </div>
+    <div id="newsList" class="news-list"></div>
+    <p id="emptyNews" class="empty" hidden>没有找到条目。可以添加第一条新闻，或调整筛选条件。</p>
+
+    <section class="section-head category-head" id="interviews">
+      <div><p class="eyebrow">INTERVIEWS · O-TÖNE</p><h2>采访</h2></div>
+      <button class="secondary" data-add-category="采访">＋ 添加采访</button>
+    </section>
+    <div id="interviewList" class="category-list"></div>
+    <p id="emptyInterviews" class="empty" hidden>还没有采访条目。</p>
+
+    <section class="section-head category-head" id="matchVideos">
+      <div><p class="eyebrow">SPIELVIDEOS · HIGHLIGHTS</p><h2>比赛视频</h2></div>
+      <button class="secondary" data-add-category="比赛视频">＋ 添加比赛视频</button>
+    </section>
+    <div id="videoList" class="category-list"></div>
+    <p id="emptyVideos" class="empty" hidden>还没有比赛视频。可保存视频标题、日期、平台和原视频链接。</p>
+
+    <section class="section-head photos-head" id="photos">
+      <div><p class="eyebrow">FOTOGRAFIE · SPIELTAG · PORTRÄT</p><h2>个人照片</h2></div>
+      <button class="primary" id="addPhotoBtn">＋ 添加照片</button>
+    </section>
+    <p class="muted section-desc">这里专门整理基米希的个人照片、肖像和公开活动照片。建议记录摄影师、媒体、原始链接和授权状态。不要把“注明来源”当作自动获得转载许可。</p>
+    <div id="photoGrid" class="photo-grid"></div>
+    <p id="emptyPhotos" class="empty" hidden>还没有照片条目。添加照片时，可以选择本地图片文件；本演示版会把图片保存在当前浏览器中。</p>
+
+    <section class="section-head category-head" id="social">
+      <div><p class="eyebrow">SOCIAL MEDIA · UPDATES</p><h2>社媒更新</h2></div>
+      <button class="secondary" data-add-category="社媒更新">＋ 添加社媒更新</button>
+    </section>
+    <div id="socialList" class="category-list"></div>
+    <p id="emptySocial" class="empty" hidden>还没有社媒更新。可以记录平台、发布时间、原帖链接和正文翻译。</p>
+
+    <section class="section-head" id="timeline">
+      <div><p class="eyebrow">CHRONIK</p><h2>时间线</h2></div>
+    </section>
+    <div id="timelineList" class="timeline"></div>
+
+    <section class="about" id="about">
+      <p class="eyebrow">ÜBER DAS ARCHIV</p>
+      <h2>让资料留下来，<br>也让出处留下来。</h2>
+      <p>此页面是本地原型：内容默认保存在当前浏览器的 localStorage 中。换设备、清理浏览器数据或使用隐私模式可能导致内容丢失。正式部署前，请配置真正的账号系统、数据库、图片存储和备份。</p>
+      <div class="about-meta"><span>J.K. ARCHIV</span><span>PERSONAL FOOTBALL PRESS ARCHIVE</span><span>V. 1.0</span></div>
+    </section>
+  </div>
+</main>
+
+<footer><span>J.K. Archiv · Private Sammlung</span><span>Quellen nennen. Rechte respektieren.</span></footer>
+
+<dialog id="newsDialog">
+  <form id="newsForm" method="dialog">
+    <div class="dialog-head"><div><p class="eyebrow">NEUER EINTRAG</p><h2>添加新闻条目</h2></div><button type="button" class="close" data-close="newsDialog" aria-label="关闭">×</button></div>
+    <input type="hidden" id="newsId">
+    <label>标题 *</label><input id="newsTitle" required maxlength="180" placeholder="例如：赛后采访 / 训练报道">
+    <div class="form-row"><div><label>发布日期 *</label><input id="newsDate" type="date" required></div><div><label>分类</label><select id="newsCategory"><option>新闻</option><option>采访</option><option>比赛视频</option><option>个人照片</option><option>社媒更新</option></select></div></div>
+    <div class="form-row"><div><label>媒体 / 来源 *</label><input id="newsSource" required placeholder="例如：Kicker、SWR、FC Bayern"></div><div><label>语言</label><select id="newsLanguage"><option>德语</option><option>英语</option><option>中文</option><option>其他</option></select></div></div>
+    <label>原文链接</label><input id="newsUrl" type="url" placeholder="https://…">
+    <label>视频播放地址（比赛视频可选）</label><input id="newsVideoUrl" type="url" placeholder="YouTube / Vimeo 嵌入链接，或可直接播放的 MP4 地址">
+    <p class="small muted">YouTube / Vimeo 和直接播放的 MP4 可尝试在本站内播放；DAZN、ZDF、Instagram 等若不允许嵌入，会保留原站链接供你打开观看。</p>
+    <label>摘要 / 中文翻译 / 个人笔记</label><textarea id="newsBody" rows="5" placeholder="写下核心内容、翻译或自己的研究笔记……"></textarea>
+    <label>标签（用逗号分隔）</label><input id="newsTags" placeholder="国家队, 采访, 2026">
+    <label>转载 / 权利说明</label><input id="newsRights" placeholder="例如：仅存原文链接；已获授权；仅私人研究">
+    <div class="dialog-actions"><button type="button" class="secondary" data-close="newsDialog">取消</button><button class="primary" type="submit">保存条目</button></div>
+  </form>
+</dialog>
+
+<dialog id="photoDialog">
+  <form id="photoForm" method="dialog">
+    <div class="dialog-head"><div><p class="eyebrow">FOTOEINTRAG</p><h2>添加照片条目</h2></div><button type="button" class="close" data-close="photoDialog" aria-label="关闭">×</button></div>
+    <input type="hidden" id="photoId">
+    <label>标题 / 说明 *</label><input id="photoTitle" required maxlength="180" placeholder="例如：比赛日、训练、球员肖像">
+    <div class="form-row"><div><label>日期</label><input id="photoDate" type="date"></div><div><label>摄影师 / 来源</label><input id="photoSource" placeholder="摄影师或媒体名称"></div></div>
+    <label>原始链接</label><input id="photoUrl" type="url" placeholder="https://…">
+    <label>选择本地图片（可选）</label><input id="photoFile" type="file" accept="image/*">
+    <label>图片地址（可选）</label><input id="photoImageUrl" type="url" placeholder="https://…">
+    <label>授权 / 使用说明</label><input id="photoRights" placeholder="例如：私人收藏、已获授权、仅链接引用">
+    <label>备注</label><textarea id="photoNotes" rows="3" placeholder="比赛、赛事、球衣、背景等"></textarea>
+    <p class="small muted">浏览器本地存储空间有限；大量高清照片请在正式网站中使用对象存储，不要直接塞进浏览器数据。</p>
+    <div class="dialog-actions"><button type="button" class="secondary" data-close="photoDialog">取消</button><button class="primary" type="submit">保存照片</button></div>
+  </form>
+</dialog>
+
+<dialog id="detailDialog"><div id="detailContent" class="detail-content"></div><div class="dialog-actions"><button class="secondary" id="closeDetail">关闭</button></div></dialog>
+<script src="app.js"></script>
+</body>
+</html>
